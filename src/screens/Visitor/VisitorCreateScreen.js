@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import {
   Content,
   Form,
@@ -15,6 +15,7 @@ import _TimePicker from '../../components/_TimePicker';
 import {WHITE} from '../../utils/colors';
 import {addVisitor} from '../../database/VisitorDbHelper';
 import {VISITOR_LISTING_SCREEN} from '../../navigation/navConstants';
+import {ACCENT_COLOR} from '../../utils/styles';
 
 const VisitorCreateScreen = ({navigation}) => {
   const initialData = {dateOfEntry: new Date(), typeOfVisit: 'Meeting'};
@@ -54,7 +55,7 @@ const VisitorCreateScreen = ({navigation}) => {
   }, [navigation]);
 
   return (
-    <Content contentContainerStyle={styles.content}>
+    <ScrollView style={styles.content}>
       <Form style={styles.form}>
         <Item stackedLabel style={styles.textInput}>
           <Label>Name</Label>
@@ -117,7 +118,7 @@ const VisitorCreateScreen = ({navigation}) => {
       <Button onPress={saveVisitor} style={styles.button}>
         <Text>Save Details</Text>
       </Button>
-    </Content>
+    </ScrollView>
   );
 };
 
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
     paddingRight: 12,
   },
   textInput: {
-    marginBottom: 13,
+    marginBottom: 5,
   },
   picker: {
     marginHorizontal: 14,
@@ -141,9 +142,11 @@ const styles = StyleSheet.create({
     marginBottom: -13,
   },
   button: {
+    backgroundColor: ACCENT_COLOR,
     justifyContent: 'center',
     marginTop: 13,
     marginHorizontal: 15,
     borderRadius: 10,
+    marginBottom: 30,
   },
 });

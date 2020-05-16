@@ -18,7 +18,7 @@ const VisitorListingScreen = ({navigation}) => {
         listRef.current.scrollToIndex({animated: true, index: 0});
       }
       const _visitorsArray = Array.from(
-        realm.objects(VISITORS_TABLE).sorted('dateOfEntry', true),
+        realm.objects(VISITORS_TABLE).sorted('timeOfEntry', true),
       );
       setVisitorsArray([..._visitorsArray]);
     }, []),
