@@ -13,6 +13,7 @@ import {
 import VisitorCreateScreen from '../screens/Visitor/VisitorCreateScreen';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import NewsListingScreen from '../screens/News/NewsListingScreen';
+import {Icon} from 'native-base';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -23,9 +24,17 @@ const VisitorStack = () => {
       <Stack.Screen
         name={VISITOR_LISTING_SCREEN}
         component={VisitorListingScreen}
-        options={{
+        options={({navigation}) => ({
           title: 'Visitors',
-        }}
+          headerLeft: () => (
+            <Icon
+              onPress={() => navigation.openDrawer()}
+              type="MaterialCommunityIcons"
+              name="menu"
+              style={{marginLeft: 10, fontSize: 36}}
+            />
+          ),
+        })}
       />
       <Stack.Screen
         name={VISITOR_CREATE_SCREEN}
@@ -44,9 +53,17 @@ const NewsrStack = () => {
       <Stack.Screen
         name={NEWS_LISTING_SCREEN}
         component={NewsListingScreen}
-        options={{
+        options={({navigation}) => ({
           title: 'Latest News',
-        }}
+          headerLeft: () => (
+            <Icon
+              onPress={() => navigation.openDrawer()}
+              type="MaterialCommunityIcons"
+              name="menu"
+              style={{marginLeft: 10, fontSize: 36}}
+            />
+          ),
+        })}
       />
     </Stack.Navigator>
   );
