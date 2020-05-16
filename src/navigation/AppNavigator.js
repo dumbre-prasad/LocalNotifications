@@ -72,7 +72,7 @@ const NewsrStack = () => {
 export default function AppNavigator() {
   return (
     <NavigationContainer ref={navigationRef}>
-      <Drawer.Navigator initialRouteName={NEWS_STACK}>
+      <Drawer.Navigator initialRouteName={VISITOR_STACK}>
         <Drawer.Screen name={VISITOR_STACK} component={VisitorStack} />
         <Drawer.Screen name={NEWS_STACK} component={NewsrStack} />
       </Drawer.Navigator>
