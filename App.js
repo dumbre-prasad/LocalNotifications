@@ -10,3 +10,11 @@ export default App;
 //TODO: Eject FAB in  component
 //TODO: Eject DateTimePicker in separate component
 //TODO: Eject Picker in  separate component
+//TODO: Sort Visitors list by time
+//TODO: Shrink Text in card
+//TODO: Handle LAndscape
+
+// Good Cofing practise
+// Cleen code
+// optimised components
+// Project structure

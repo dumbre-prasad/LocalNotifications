@@ -17,16 +17,33 @@ import {addVisitor} from '../../database/VisitorDbHelper';
 import {VISITOR_LISTING_SCREEN} from '../../navigation/navConstants';
 
 const VisitorCreateScreen = ({navigation}) => {
-  const initialData = {dateOfEntry: new Date()};
+  const initialData = {dateOfEntry: new Date(), typeOfVisit: 'Meeting'};
   const [visitor, setVisitor] = useState(initialData);
-
+  const {
+    name,
+    email,
+    typeOfVisit,
+    personToVisit,
+    timeOfEntry,
+    timeOfExit,
+  } = visitor;
   const saveVisitor = async () => {
-    await addVisitor({visitor});
-    navigation.navigate(VISITOR_LISTING_SCREEN);
+    if (isValid()) {
+      await addVisitor({visitor});
+      navigation.navigate(VISITOR_LISTING_SCREEN);
+    } else {
+      alert('Please fill up all details');
+    }
   };
 
   const resetState = () => {
     setVisitor(initialData);
+  };
+
+  const isValid = () => {
+    return (
+      name && email && typeOfVisit && personToVisit && timeOfEntry && timeOfExit
+    );
   };
 
   useEffect(() => {
@@ -36,28 +53,17 @@ const VisitorCreateScreen = ({navigation}) => {
     return unsubscribe;
   }, [navigation]);
 
-  const {
-    name,
-    email,
-    typeOfVisit,
-    personToVisit,
-    timeOfEntry,
-    timeOfExit,
-  } = visitor;
-
-  console.warn('timeOfEntry', timeOfEntry);
-
   return (
     <Content contentContainerStyle={styles.content}>
       <Form style={styles.form}>
-        <Item floatingLabel style={styles.textInput}>
+        <Item stackedLabel style={styles.textInput}>
           <Label>Name</Label>
           <Input
             value={name}
             onChangeText={(name) => setVisitor({...visitor, name})}
           />
         </Item>
-        <Item floatingLabel style={styles.textInput}>
+        <Item stackedLabel style={styles.textInput}>
           <Label>Email</Label>
           <Input
             value={email}
@@ -82,7 +88,7 @@ const VisitorCreateScreen = ({navigation}) => {
             <Picker.Item label="Personal" value="Personal" />
           </Picker>
         </View>
-        <Item floatingLabel style={styles.textInput}>
+        <Item stackedLabel style={styles.textInput}>
           <Label>Person to visit</Label>
           <Input
             value={personToVisit}
@@ -91,7 +97,7 @@ const VisitorCreateScreen = ({navigation}) => {
             }
           />
         </Item>
-        <Item floatingLabel style={styles.textInput}>
+        <Item stackedLabel style={styles.textInput}>
           <Label>Date of entry</Label>
           <Input disabled value={new Date().toLocaleDateString()} />
         </Item>
