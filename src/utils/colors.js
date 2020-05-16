@@ -1,2 +1,3 @@
-export const BLUE = 'blue',
+export const WHITE = 'white',
+  BLUE = 'blue',
   PURPLE = 'purple';

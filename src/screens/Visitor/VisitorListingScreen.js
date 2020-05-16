@@ -2,8 +2,9 @@ import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {Fab, Icon} from 'native-base';
 import {ACCENT_COLOR} from '../../utils/styles';
+import {VISITOR_CREATE_SCREEN} from '../../navigation/navConstants';
 
-const VisitorListingScreen = ({params}) => (
+const VisitorListingScreen = ({navigation}) => (
   <View style={{flex: 1}}>
     <Fab
       active={false}
@@ -11,7 +12,7 @@ const VisitorListingScreen = ({params}) => (
       containerStyle={{}}
       style={{backgroundColor: ACCENT_COLOR}}
       position="bottomRight"
-      onPress={() => console.log('pressed')}>
+      onPress={() => navigation.navigate(VISITOR_CREATE_SCREEN)}>
       <Icon name="add" />
     </Fab>
   </View>
