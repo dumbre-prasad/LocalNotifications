@@ -1,9 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import 'react-native-gesture-handler';
 import AppNavigator from './src/navigation/AppNavigator';
 console.disableYellowBox = true;
 console.ignoredYellowBox = ['Animated: `useNativeDriver`'];
-const App = () => <AppNavigator />;
+
+import BackgroundTask from 'react-native-background-task';
+BackgroundTask.define(() => {
+  console.log('ADITI');
+  BackgroundTask.finish();
+});
+
+const App = () => {
+  useEffect(() => {
+    BackgroundTask.schedule();
+  }, []);
+  return <AppNavigator />;
+};
 
 export default App;
 
