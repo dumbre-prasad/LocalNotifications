@@ -4,15 +4,31 @@ import AppNavigator from './src/navigation/AppNavigator';
 console.disableYellowBox = true;
 console.ignoredYellowBox = ['Animated: `useNativeDriver`'];
 
-import BackgroundTask from 'react-native-background-task';
-BackgroundTask.define(() => {
-  console.log('ADITI');
-  BackgroundTask.finish();
-});
+// import BackgroundTask from 'react-native-background-task';
+// BackgroundTask.define(() => {
+//   console.log('This app is running in background');
+//   showLocalNotification();
+//   BackgroundTask.finish();
+// });
+var PushNotification = require('react-native-push-notification');
+
+const showLocalNotification = () => {
+  PushNotification.localNotificationSchedule({
+    message: 'This app is running in background',
+    date: new Date(Date.now() + 1 * 1000),
+    ongoing: true,
+    // repeatType: 'time',
+    // repeatTime: 1000,
+    // vibrate: false,
+    // playSound: false,
+    // soundName: 'none',
+  });
+};
 
 const App = () => {
   useEffect(() => {
-    BackgroundTask.schedule();
+    showLocalNotification();
+    // BackgroundTask.schedule();
   }, []);
   return <AppNavigator />;
 };
