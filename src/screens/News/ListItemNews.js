@@ -37,9 +37,9 @@ const ListItemNews = ({visitor}) => {
                 setError(true);
               }}
               style={styles.image}
-              source={{
-                uri: urlToImage,
-              }}
+              source={
+                urlToImage && urlToImage.length != 0 ? {uri: urlToImage} : null
+              }
             />
             {isLoading && (
               <ActivityIndicator
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   image: {
     height: 200,
     width: '100%',
-    resizeMode: 'stretch',
+    resizeMode: 'contain',
   },
   imageContainer: {
     marginVertical: 10,
