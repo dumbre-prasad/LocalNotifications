@@ -44,8 +44,8 @@ def flipper_post_install(installer)
   end
 end
 
-target 'Visitor' do
-  # Pods for Visitor
+target 'Local' do
+  # Pods for Local
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -79,7 +79,7 @@ target 'Visitor' do
 
   pod 'RNBackgroundFetch', :path => '../node_modules/react-native-background-fetch'
 
-  target 'VisitorTests' do
+  target 'LocalTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -96,10 +96,10 @@ target 'Visitor' do
   end
 end
 
-target 'Visitor-tvOS' do
-  # Pods for Visitor-tvOS
+target 'Local-tvOS' do
+  # Pods for Local-tvOS
 
-  target 'Visitor-tvOSTests' do
+  target 'Local-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

@@ -2,30 +2,31 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {navigationRef} from './navServices';
 import {createStackNavigator} from '@react-navigation/stack';
-import VisitorListingScreen from '../screens/Visitor/visitorListingScreen/VisitorListingScreen';
-import {
-  VISITOR_LISTING_SCREEN,
-  VISITOR_CREATE_SCREEN,
-  VISITOR_STACK,
-  NEWS_LISTING_SCREEN,
-  NEWS_STACK,
-} from './navConstants';
-import VisitorCreateScreen from '../screens/Visitor/VisitorCreateScreen';
+import ScheduleNotificationScreen from '../screens/ScheduleNotificationScreen';
+import {SCHEDULE_NOTIFICATION_SCREEN, NOTIFICATION_STACK} from './navConstants';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import NewsListingScreen from '../screens/News/NewsListingScreen';
-import {Icon} from 'native-base';
+import {Icon, Text} from 'native-base';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {View} from 'react-native';
+
+function TestScreen() {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>TestScreen!</Text>
+    </View>
+  );
+}
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
-
-const VisitorStack = () => {
+const NotificationStack = () => {
   return (
-    <Stack.Navigator initialRouteName={VISITOR_LISTING_SCREEN}>
+    <Stack.Navigator initialRouteName={SCHEDULE_NOTIFICATION_SCREEN}>
       <Stack.Screen
-        name={VISITOR_LISTING_SCREEN}
-        component={VisitorListingScreen}
+        name={SCHEDULE_NOTIFICATION_SCREEN}
+        component={ScheduleNotificationScreen}
         options={({navigation}) => ({
-          title: 'Visitors',
+          title: 'Schedule Notifications',
           headerLeft: () => (
             <Icon
               onPress={() => navigation.openDrawer()}
@@ -35,46 +36,26 @@ const VisitorStack = () => {
             />
           ),
         })}
-      />
-      <Stack.Screen
-        name={VISITOR_CREATE_SCREEN}
-        component={VisitorCreateScreen}
-        options={{
-          title: 'Add Visitor',
-        }}
       />
     </Stack.Navigator>
   );
 };
 
-const NewsrStack = () => {
+const Tab = createBottomTabNavigator();
+const TabNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName={VISITOR_LISTING_SCREEN}>
-      <Stack.Screen
-        name={NEWS_LISTING_SCREEN}
-        component={NewsListingScreen}
-        options={({navigation}) => ({
-          title: 'Latest News',
-          headerLeft: () => (
-            <Icon
-              onPress={() => navigation.openDrawer()}
-              type="MaterialCommunityIcons"
-              name="menu"
-              style={{marginLeft: 10, fontSize: 36}}
-            />
-          ),
-        })}
-      />
-    </Stack.Navigator>
+    <Tab.Navigator initialRouteName="Notifications">
+      <Tab.Screen name="Notifications" component={NotificationStack} />
+      <Tab.Screen name="Other" component={TestScreen} />
+    </Tab.Navigator>
   );
 };
 
 export default function AppNavigator() {
   return (
     <NavigationContainer ref={navigationRef}>
-      <Drawer.Navigator initialRouteName={VISITOR_STACK}>
-        <Drawer.Screen name={VISITOR_STACK} component={VisitorStack} />
-        <Drawer.Screen name={NEWS_STACK} component={NewsrStack} />
+      <Drawer.Navigator initialRouteName={NOTIFICATION_STACK}>
+        <Drawer.Screen name={NOTIFICATION_STACK} component={TabNavigator} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

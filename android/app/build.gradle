@@ -1,4 +1,5 @@
 apply plugin: "com.android.application"
+	apply plugin: 'com.google.gms.google-services'
 
 import com.android.build.OutputFile
 
@@ -129,7 +130,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.visitor"
+        applicationId "com.local"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -154,7 +155,7 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
-            debuggable false
+            debuggable true
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
@@ -189,6 +190,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.firebase:firebase-analytics:17.3.0'
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
